@@ -1,0 +1,8 @@
+
+digraph Q {
+	q1 -> { a1a, a1b, a1c }
+	a1a -> a
+	a1b -> b
+	a1c -> q2
+	q2 -> { a2a, a2b }
+}
