@@ -2,8 +2,6 @@ package decstree
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestQuestion_Answer(t *testing.T) {
@@ -28,6 +26,11 @@ func TestQuestion_Answer(t *testing.T) {
 		"workout": "f",
 	})
 
-	assert.NoError(t, err)
-	assert.Equal(t, "short", got)
+	if err != nil {
+		t.Errorf("want no error got %v", err)
+	}
+
+	if got != "short" {
+		t.Errorf("want result to 'short' got %v", got)
+	}
 }
