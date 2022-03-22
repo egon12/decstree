@@ -22,6 +22,8 @@ type (
 	}
 
 	Data map[string]string
+
+	Traces []string
 )
 
 func (q *Question) Answer(data Data) (string, error) {
@@ -39,7 +41,28 @@ func (q *Question) Answer(data Data) (string, error) {
 		return a.Result, nil
 	}
 
-	return "", fmt.Errorf("data '%s' in '%s' cannot been answer with '%s'", val, q.Key, q.Answers)
+	return "", fmt.Errorf("data '%s' in '%s' don't match with any '%s'", val, q.Key, q.Answers)
+}
+
+func (q *Question) AnswerWithTrace(data Data) (ids Traces, answer string, err error) {
+	val := data[q.Key]
+
+	for _, a := range q.Answers {
+		if a.Value != val {
+			continue
+		}
+
+		if a.Next != nil {
+			ids, answer, err = a.Next.AnswerWithTrace(data)
+			ids = append(ids, a.ID, q.ID)
+			return ids, answer, err
+		}
+
+		return []string{a.ID, q.ID, a.Result}, a.Result, nil
+	}
+
+	return []string{q.ID}, "", fmt.Errorf("data '%s' in '%s' cannot been answer with '%s'", val, q.Key, q.Answers)
+
 }
 
 func (a Answers) String() string {
