@@ -7,6 +7,7 @@ import (
 
 type (
 	Question struct {
+		ID      string  `json:"i,omitempty"`
 		Title   string  `json:"t"`
 		Key     string  `json:"k"`
 		Answers Answers `json:"a"`
@@ -15,10 +16,11 @@ type (
 	Answers []*Answer
 
 	Answer struct {
+		ID     string    `json:"i,omitempty"`
 		Title  string    `json:"t"`
 		Value  string    `json:"v"`
-		Next   *Question `json:"n"`
-		Result string    `json:"r"`
+		Next   *Question `json:"n,omitempty"`
+		Result string    `json:"r,omitempty"`
 	}
 
 	Data map[string]string
@@ -73,5 +75,4 @@ func (a Answers) String() string {
 		}
 	}
 	return strings.Join(res, ",")
-
 }
