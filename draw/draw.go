@@ -21,7 +21,7 @@ func SVG(w io.Writer, q *decstree.Question, t decstree.Traces) error {
 
 func ToDotWithTrace(q *decstree.Question, traces []string) string {
 	result := NewSet()
-	first := "digraph Q {\n\tnode [style=rounded]\n" + questionToDot(q) + "\n" + printShapeQWithColor(q, traces, result)
+	first := "digraph Q {\n\tnode [style=\"rounded,filled\"]\n" + questionToDot(q) + "\n" + printShapeQWithColor(q, traces, result)
 	return first + printShapeResult(result, traces) + "\n}"
 }
 
@@ -50,29 +50,18 @@ func answersToDot(a decstree.Answers) string {
 	)
 }
 
-func printShapeQ(q *decstree.Question) string {
-	res := fmt.Sprintf("%s [fontname=helvetica shape=box]\n", q.ID)
-	for _, a := range q.Answers {
-		res += fmt.Sprintf("%s [fontname=helvetica shape=oval]\n", a.ID)
-		if a.Next != nil {
-			res += printShapeQ(a.Next)
-		}
-	}
-	return res
-}
-
 func printShapeQWithColor(q *decstree.Question, traces []string, result set) (qa string) {
 	res := ""
 	if isIn(traces, q.ID) {
-		res = fmt.Sprintf("\t\"%s\" [fontname=helvetica shape=diamond, style=\"rounded,filled\", fillcolor=steelblue]\n", q.ID)
+		res = fmt.Sprintf("\t\"%s\" [fontname=helvetica shape=box style=\"filled\" fillcolor=steelblue label=\"%s\"]\n", q.ID, q.Label)
 	} else {
-		res = fmt.Sprintf("\t\"%s\" [fontname=helvetica shape=diamond]\n", q.ID)
+		res = fmt.Sprintf("\t\"%s\" [fontname=helvetica shape=box style=\"filled\" label=\"%s\"]\n", q.ID, q.Label)
 	}
 	for _, a := range q.Answers {
 		if isIn(traces, a.ID) {
-			res += fmt.Sprintf("\t\"%s\" [fontname=helvetica shape=box, style=\"rounded,filled\", fillcolor=steelblue]\n", a.ID)
+			res += fmt.Sprintf("\t\"%s\" [fontname=helvetica shape=box style=\"rounded,filled\" fillcolor=steelblue label=\"%s\"]\n", a.ID, a.Label)
 		} else {
-			res += fmt.Sprintf("\t\"%s\" [fontname=helvetica shape=box]\n", a.ID)
+			res += fmt.Sprintf("\t\"%s\" [fontname=helvetica shape=box label=\"%s\"]\n", a.ID, a.Label)
 		}
 		if a.Next != nil {
 			res += printShapeQWithColor(a.Next, traces, result)

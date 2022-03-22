@@ -1,0 +1,81 @@
+{
+  "l": "",
+  "k": "Weather",
+  "a": [
+    {
+      "l": "",
+      "v": "Windy",
+      "n": {
+        "l": "",
+        "k": "Parental Availibility",
+        "a": [
+          {
+            "l": "",
+            "v": "Yes",
+            "r": "Cinema"
+          },
+          {
+            "l": "",
+            "v": "No",
+            "n": {
+              "l": "",
+              "k": "Wealthy",
+              "a": [
+                {
+                  "l": "",
+                  "v": "Poor",
+                  "r": "Cinema"
+                },
+                {
+                  "l": "",
+                  "v": "Rich",
+                  "r": "Shopping"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "l": "",
+      "v": "Sunny",
+      "n": {
+        "l": "",
+        "k": "Parental Availibility",
+        "a": [
+          {
+            "l": "",
+            "v": "Yes",
+            "r": "Cinema"
+          },
+          {
+            "l": "",
+            "v": "No",
+            "r": "Tenis"
+          }
+        ]
+      }
+    },
+    {
+      "l": "",
+      "v": "Rainy",
+      "n": {
+        "l": "",
+        "k": "Parental Availibility",
+        "a": [
+          {
+            "l": "",
+            "v": "Yes",
+            "r": "Cinema"
+          },
+          {
+            "l": "",
+            "v": "No",
+            "r": "Home"
+          }
+        ]
+      }
+    }
+  ]
+}

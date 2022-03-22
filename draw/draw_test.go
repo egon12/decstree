@@ -59,17 +59,40 @@ func TestSVG(t *testing.T) {
 	f.Close()
 }
 
+func TestSVG2(t *testing.T) {
+	f, err := os.Open("../output.json")
+	assert.NoError(t, err)
+
+	q, err := decstree.Parse(f)
+	assert.NoError(t, err)
+
+	traces, _, _ := q.AnswerWithTrace(map[string]string{
+		"Weather":               "Windy",
+		"Parental Availibility": "No",
+		"Wealthy":               "Poor",
+	})
+	f, err = os.Create("qq2.svg")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	SVG(f, q, traces)
+	f.Close()
+}
+
 func TestToGraph(t *testing.T) {
 
 	q := &decstree.Question{}
 	err := json.Unmarshal([]byte(question), q)
 	assert.NoError(t, err)
 
+	decstree.SetLabel(q)
+
 	ids, _, err := q.AnswerWithTrace(data)
 
 	got := ToDotWithTrace(q, ids)
 	want := `digraph Q {
-	node [style=rounded]
+	node [style="rounded,filled"]
 	"level" -> {rank=same; "a1_4","a1_5","a1_6","a1_7","a1_8"}
 	"a1_4" -> "alber"
 	"a1_5" -> "bobby"
@@ -84,20 +107,20 @@ func TestToGraph(t *testing.T) {
 	"a3_pm" -> "dan"
 	"a3_lead" -> "harlye"
 	"a1_8" -> "myvp"
-	"level" [fontname=helvetica shape=diamond, style="rounded,filled", fillcolor=steelblue]
-	"a1_4" [fontname=helvetica shape=box]
-	"a1_5" [fontname=helvetica shape=box]
-	"a1_6" [fontname=helvetica shape=box, style="rounded,filled", fillcolor=steelblue]
-	"job_1" [fontname=helvetica shape=diamond, style="rounded,filled", fillcolor=steelblue]
-	"a2_tech" [fontname=helvetica shape=box]
-	"a2_pm" [fontname=helvetica shape=box, style="rounded,filled", fillcolor=steelblue]
-	"a2_lead" [fontname=helvetica shape=box]
-	"a1_7" [fontname=helvetica shape=box]
-	"job_2" [fontname=helvetica shape=diamond]
-	"a3_tech" [fontname=helvetica shape=box]
-	"a3_pm" [fontname=helvetica shape=box]
-	"a3_lead" [fontname=helvetica shape=box]
-	"a1_8" [fontname=helvetica shape=box]
+	"level" [fontname=helvetica shape=box style="filled" fillcolor=steelblue label="level"]
+	"a1_4" [fontname=helvetica shape=box label="4"]
+	"a1_5" [fontname=helvetica shape=box label="5"]
+	"a1_6" [fontname=helvetica shape=box style="rounded,filled" fillcolor=steelblue label="6"]
+	"job_1" [fontname=helvetica shape=box style="filled" fillcolor=steelblue label="job"]
+	"a2_tech" [fontname=helvetica shape=box label="tech"]
+	"a2_pm" [fontname=helvetica shape=box style="rounded,filled" fillcolor=steelblue label="pm"]
+	"a2_lead" [fontname=helvetica shape=box label="lead"]
+	"a1_7" [fontname=helvetica shape=box label="7"]
+	"job_2" [fontname=helvetica shape=box style="filled" label="job"]
+	"a3_tech" [fontname=helvetica shape=box label="tech"]
+	"a3_pm" [fontname=helvetica shape=box label="pm"]
+	"a3_lead" [fontname=helvetica shape=box label="lead"]
+	"a1_8" [fontname=helvetica shape=box label="8"]
 	"alber" [fontname=helvetica shape=oval]
 	"bobby" [fontname=helvetica shape=oval]
 	"chris" [fontname=helvetica shape=oval]
