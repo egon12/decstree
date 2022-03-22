@@ -6,16 +6,16 @@ import (
 
 func TestQuestion_Answer(t *testing.T) {
 	q := &Question{
-		Title: "your gender",
+		Label: "your gender",
 		Key:   "gender",
 		Answers: []*Answer{
-			{Title: "male", Value: "m", Result: "tall"},
-			{Title: "female", Value: "f", Next: &Question{
-				Title: "workout alot",
+			{Label: "male", Value: "m", Result: "tall"},
+			{Label: "female", Value: "f", Next: &Question{
+				Label: "workout alot",
 				Key:   "workout",
 				Answers: []*Answer{
-					{Title: "workout alot", Value: "t", Result: "tall"},
-					{Title: "rarely workout", Value: "f", Result: "short"},
+					{Label: "workout alot", Value: "t", Result: "tall"},
+					{Label: "rarely workout", Value: "f", Result: "short"},
 				},
 			}},
 		},
