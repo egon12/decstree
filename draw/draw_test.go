@@ -12,30 +12,33 @@ import (
 const question = `
 {
 	"i": "level",
+	"l": "level",
 	"k": "level",
 	"a": [
-		{ "i": "a1_4", "v": "4", "r": "alber" },
-		{ "i": "a1_5", "v": "5", "r": "bobby" },
-		{ "i": "a1_6", "v": "6", "n": {
+		{ "i": "a1_4", "v": "4", "l": "4", "r": "alber" },
+		{ "i": "a1_5", "v": "5", "l": "5", "r": "bobby" },
+		{ "i": "a1_6", "v": "6", "l": "6", "n": {
 			"i": "job_1",
+			"l": "job",
 			"k": "job",
 			"a": [
-				{ "i": "a2_tech", "v": "tech", "r": "chris" },
-				{ "i": "a2_pm", "v": "pm", "r": "dan" },
-				{ "i": "a2_lead", "v": "lead", "r": "eugine" }
+				{ "i": "a2_tech", "l": "tech", "v": "tech", "r": "chris" },
+				{ "i": "a2_pm",   "l": "pm",   "v": "pm", "r": "dan" },
+				{ "i": "a2_lead", "l": "lead", "v": "lead", "r": "eugine" }
 			]
 		}},
-		{ "i": "a1_7", "v": "7", "n": {
+		{ "i": "a1_7", "l": "7", "v": "7", "n": {
 			"i": "job_2",
+			"l": "job",
 			"k": "job",
 			"a": [
-				{ "i": "a3_tech", "v": "tech", "r": "farah" },
-				{ "i": "a3_pm", "v": "pm", "r": "dan" },
-				{ "i": "a3_lead", "v": "lead", "r": "harlye" }
+				{ "i": "a3_tech", "l": "tech", "v": "tech", "r": "farah" },
+				{ "i": "a3_pm",   "l": "pm",   "v": "pm", "r": "dan" },
+				{ "i": "a3_lead", "l": "lead", "v": "lead", "r": "harlye" }
 			]
 
 		}},
-		{ "i": "a1_8", "v": "8", "r": "myvp" }
+		{ "i": "a1_8", "l": "8", "v": "8", "r": "myvp" }
 	]
 }`
 
