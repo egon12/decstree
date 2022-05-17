@@ -36,18 +36,18 @@ func NextFieldName(data Data) FieldName {
 		Gain float64
 	}
 
-	g := cols.Map(data.Header, func(field FieldName) Gains {
+	gainsList := cols.Map(data.Header, func(field FieldName) Gains {
 		return Gains{
 			Gain:      Gain(data.Rows, field),
 			FieldName: field,
 		}
 	})
 
-	sg := cols.MaxStruct(g, func(g Gains) float64 {
+	maxGains := cols.MaxStruct(gainsList, func(g Gains) float64 {
 		return g.Gain
 	})
 
-	return sg.FieldName
+	return maxGains.FieldName
 }
 
 func ShouldReturnResult(rows Rows) bool {
